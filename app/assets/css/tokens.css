@@ -1,0 +1,51 @@
+/* Generated from design-system/tokens.json — do not edit by hand. Run `npm run tokens`. */
+:root, [data-theme="light"] {
+  --surface: #F4EFE6;
+  --surface-raised: #FFFFFF;
+  --ink: #16181D;
+  --ink-muted: #5B5650;
+  --line: #E2DACD;
+  --brand: #F26B1D;
+  --brand-strong: #B8480F;
+  --brand-tint: #FFE1CC;
+  --ink-on-brand: #16181D;
+  --accent: #0E6F6A;
+  --accent-tint: #D7ECE9;
+  --danger: #B42318;
+  color-scheme: light;
+}
+[data-theme="dark"] {
+  --surface: #121316;
+  --surface-raised: #1C1E23;
+  --ink: #F4EFE6;
+  --ink-muted: #A8A39B;
+  --line: #2C2F35;
+  --brand: #FF7A2E;
+  --brand-strong: #FF9A5C;
+  --brand-tint: #3A2214;
+  --ink-on-brand: #16181D;
+  --accent: #3FBFB5;
+  --accent-tint: #12322F;
+  --danger: #F97066;
+  color-scheme: dark;
+}
+:root {
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-12: 48px;
+  --space-24: 96px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 28px;
+  --font-display: "Readex Pro", "IBM Plex Sans Arabic", system-ui, sans-serif;
+  --font-sans: "IBM Plex Sans Arabic", system-ui, sans-serif;
+}
+.t-display { font-family: var(--font-display); font-size: 56px; line-height: 64px; font-weight: 700; }
+.t-h1 { font-family: var(--font-display); font-size: 40px; line-height: 50px; font-weight: 700; }
+.t-h2 { font-family: var(--font-display); font-size: 28px; line-height: 38px; font-weight: 600; }
+.t-h3 { font-family: var(--font-display); font-size: 20px; line-height: 30px; font-weight: 600; }
+.t-body { font-family: var(--font-sans); font-size: 16px; line-height: 28px; font-weight: 400; }
+.t-small { font-family: var(--font-sans); font-size: 14px; line-height: 22px; font-weight: 400; }
+.t-label { font-family: var(--font-sans); font-size: 13px; line-height: 18px; font-weight: 600; }
