@@ -17,11 +17,11 @@ Light (default) and dark, from the tokens. Follows the visitor's system setting 
 ## Pages
 | Route | Content |
 |---|---|
-| `/` | Hero, services (6), how we work (3 steps), starting prices, work placeholder, final CTA |
-| `/services` | All 11 services with what is included |
-| `/pricing` | Starting prices in JOD, notes on what changes a price |
+| `/` | Hero illustration, platforms, build + grow (all 11 services), ad-to-order funnel, how we work (3 steps), price chart + monthly prices, final CTA |
+| `/services` | All 11 services in build / grow panels with what is included, funnel |
+| `/pricing` | Price charts, full price table in JOD, what changes a price, Gulf quotes |
 | `/work` | Case-study slots (placeholders until real projects are added) |
-| `/contact` | WhatsApp, phone, email, location, booking; a form that opens WhatsApp with the message filled in |
+| `/contact` | WhatsApp, phone, email, location, booking; a form that opens WhatsApp with the message filled in, with a live phone preview of that message |
 
 ## Content rules (from the design system README)
 - Results and numbers, no hype. **No invented stats, clients or testimonials**: missing facts stay as visible placeholders like `[رقم واتساب]`.
@@ -29,7 +29,7 @@ Light (default) and dark, from the tokens. Follows the visitor's system setting 
 - Buttons are verbs.
 
 ## Components
-`AppHeader`, `AppFooter`, `RLogo`, `RIcon`, `ThemeToggle`, `ServiceCard`, `PriceCard`, `SectionHead`, `CtaBand`.
+`AppHeader`, `AppFooter`, `RLogo`, `RIcon`, `ThemeToggle`, `SectionHead`, `CtaBand`, `HeroScene`, `DemandFunnel`, `PriceChart`, `ChatPreview`.
 
 ## Done when
 - `npm run generate` succeeds with no warnings that matter.

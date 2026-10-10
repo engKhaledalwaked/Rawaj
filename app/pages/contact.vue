@@ -5,23 +5,25 @@ useHead({ title: 'تواصل معنا — رواج' })
 const form = reactive({ name: '', business: '', service: '', message: '' })
 const ready = computed(() => contact.whatsapp.length > 0)
 
+// The same text is previewed in the phone and sent to WhatsApp.
+const text = computed(() => [
+  `مرحباً رواج، أنا ${form.name || '…'}`,
+  form.business && `النشاط: ${form.business}`,
+  form.service && `الخدمة: ${form.service}`,
+  form.message,
+].filter(Boolean).join('\n'))
+
 // No backend: the form opens WhatsApp with the message filled in.
 function send() {
   if (!ready.value) return
-  const text = [
-    `مرحباً رواج، أنا ${form.name}`,
-    form.business && `النشاط: ${form.business}`,
-    form.service && `الخدمة: ${form.service}`,
-    form.message,
-  ].filter(Boolean).join('\n')
-  window.open(`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(text)}`, '_blank', 'noopener')
+  window.open(`https://wa.me/${contact.whatsapp}?text=${encodeURIComponent(text.value)}`, '_blank', 'noopener')
 }
 </script>
 
 <template>
   <section class="section container wrap">
     <div>
-      <SectionHead level="h1" eyebrow="تواصل معنا" title="احكِ لنا عن مشروعك" lead="نرد خلال يوم عمل. المكالمة الأولى مجانية، ومدتها 20 دقيقة." />
+      <SectionHead level="h1" title="احكِ لنا عن مشروعك" lead="نرد خلال يوم عمل. المكالمة الأولى مجانية، ومدتها 20 دقيقة." />
       <ul class="ways">
         <li><RIcon name="chat" /><div><strong>واتساب</strong><span class="muted" :class="{ placeholder: !ready }">{{ ready ? '+' + contact.whatsapp : '[رقم واتساب]' }}</span></div></li>
         <li><RIcon name="phone" /><div><strong>هاتف</strong><span class="muted" dir="ltr">{{ contact.phone }}</span></div></li>
@@ -57,14 +59,25 @@ function send() {
       </button>
       <p v-if="!ready" class="t-small placeholder">[أضف رقم واتساب في app/data/site.ts لتفعيل الإرسال]</p>
     </form>
+
+    <ChatPreview :text="text" class="preview" />
   </section>
 </template>
 
 <style scoped>
-.wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.wrap { display: grid; grid-template-columns: 1fr 1fr 280px; gap: 40px; align-items: start; }
+.preview { position: sticky; top: 96px; }
 .ways { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 16px; }
 .ways li { display: flex; align-items: flex-start; gap: 14px; }
 .ways div { display: flex; flex-direction: column; line-height: 24px; }
 .form { display: flex; flex-direction: column; gap: 16px; }
-@media (max-width: 860px) { .wrap { grid-template-columns: 1fr; } }
+@media (max-width: 1100px) {
+  .wrap { grid-template-columns: 1fr 280px; }
+  .wrap > div:first-child { grid-column: 1 / -1; }
+  .ways { flex-direction: row; flex-wrap: wrap; gap: 16px 36px; }
+}
+@media (max-width: 760px) {
+  .wrap { grid-template-columns: 1fr; }
+  .preview { position: static; }
+}
 </style>

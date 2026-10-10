@@ -33,6 +33,17 @@ export const services: Service[] = [
   { id: 'maintenance', icon: 'maintenance', group: 'grow', title: 'الصيانة والحماية', summary: 'تحديثات ونسخ احتياطي ومراقبة، حتى يبقى موقعك سريعاً وآمناً.', includes: ['تحديثات أمنية', 'نسخ احتياطي دوري', 'تعديلات صغيرة شهرية'] },
 ]
 
+// The path from an ad to an order, and which services work at each stage (ids from `services`).
+export const funnel = [
+  { stage: 'يراك', what: 'إعلان أو نتيجة بحث أو منشور', services: ['ads', 'seo', 'social-media'] },
+  { stage: 'يزورك', what: 'موقع أو متجر أو تطبيق سريع وواضح', services: ['web', 'ecommerce', 'mobile-app'] },
+  { stage: 'يراسلك', what: 'زر واتساب ونموذج طلب في المكان الصحيح', services: ['ui-ux', 'web'] },
+  { stage: 'يشتري', what: 'دفع وحجز وتتبع لكل طلب', services: ['ecommerce', 'code', 'analytics'] },
+]
+
+// Platforms named in the services above.
+export const platforms = ['Meta', 'Google', 'TikTok', 'Snapchat', 'سلة', 'زد', 'Shopify', 'App Store', 'Google Play']
+
 export const steps = [
   { icon: 'strategy', title: 'نخطط', body: 'نفهم هدفك، ونتفق على الأرقام التي سنقيس بها النجاح قبل أن نبدأ.' },
   { icon: 'launch', title: 'نطلق', body: 'نبني على مراحل تراها أولاً بأول، ونطلق بأسرع وقت ممكن.' },

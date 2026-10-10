@@ -31,7 +31,7 @@ Marketing site for Rawaj (رواج), a software and digital-advertising studio i
     <td align="center"><sub>Home, dark</sub></td>
   </tr>
   <tr>
-    <td><img src="docs/screenshots/services-light.png" alt="Services page"></td>
+    <td><img src="docs/screenshots/services-light.png" alt="Services page: build and grow"></td>
     <td><img src="docs/screenshots/pricing-dark.png" alt="Pricing page, dark theme"></td>
   </tr>
   <tr>
@@ -44,7 +44,7 @@ Marketing site for Rawaj (رواج), a software and digital-advertising studio i
   <img src="docs/screenshots/mobile-light.png" alt="Mobile, light" width="230">
   &nbsp;&nbsp;
   <img src="docs/screenshots/mobile-dark.png" alt="Mobile, dark" width="230">
-  <br><sub>390px, both themes</sub>
+  <br><sub>390px: contact page with the live WhatsApp preview, and home in dark</sub>
 </p>
 
 ## The site has one job
@@ -105,7 +105,7 @@ flowchart TB
     end
 
     MC --> CMP
-    RL & RI --> CMP["components/<br>AppHeader · AppFooter · ServiceCard · PriceCard<br>SectionHead · CtaBand · ThemeToggle"]
+    RL & RI --> CMP["components/<br>AppHeader · AppFooter · HeroScene · DemandFunnel<br>PriceChart · ChatPreview · SectionHead · CtaBand · ThemeToggle"]
     CMP --> PG
     PG -- "nuxt generate" --> OUT[(".output/public<br>12 prerendered routes")]
 ```
@@ -230,8 +230,8 @@ rawaj-web/
 │   ├── assets/
 │   │   ├── brand/          rawaj-logo.svg, rawaj-icons.json (inlined, theme-aware)
 │   │   └── css/            tokens.css (generated) + main.css
-│   ├── components/         AppHeader, AppFooter, RLogo, RIcon, ThemeToggle,
-│   │                       SectionHead, ServiceCard, PriceCard, CtaBand
+│   ├── components/         AppHeader, AppFooter, RLogo, RIcon, ThemeToggle, SectionHead, CtaBand,
+│   │                       HeroScene, DemandFunnel, PriceChart, ChatPreview
 │   ├── data/site.ts        all copy and data
 │   ├── pages/              index, services, pricing, work, contact
 │   └── app.vue

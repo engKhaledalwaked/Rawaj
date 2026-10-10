@@ -14,7 +14,7 @@ withDefaults(defineProps<{ title?: string; lead?: string }>(), {
         <p>{{ lead }}</p>
       </div>
       <NuxtLink to="/contact" class="btn btn-primary">
-        احجز مكالمة مجانية <RIcon name="arrow-left" :size="20" />
+        احجز مكالمة مجانية
       </NuxtLink>
     </div>
   </section>
@@ -31,10 +31,11 @@ withDefaults(defineProps<{ title?: string; lead?: string }>(), {
 .text { display: flex; flex-direction: column; gap: 8px; max-width: 560px; position: relative; }
 .text p { opacity: .85; }
 /* the logo's rising dots, as a quiet motif */
-.dots { position: absolute; inset-inline-end: 34%; top: 50%; transform: translateY(-50%); direction: ltr; display: flex; align-items: flex-end; gap: 10px; opacity: .9; }
+.dots { position: absolute; inset-inline-end: 300px; top: 50%; transform: translateY(-50%); direction: ltr; display: flex; align-items: flex-end; gap: 10px; opacity: .9; }
 .dots span { display: block; border-radius: 50%; background: var(--brand); }
 .dots span:nth-child(1) { width: 12px; height: 12px; }
 .dots span:nth-child(2) { width: 20px; height: 20px; margin-bottom: 14px; }
 .dots span:nth-child(3) { width: 34px; height: 34px; margin-bottom: 34px; }
-@media (max-width: 760px) { .band { padding: 32px 24px; } .dots { display: none; } }
+@media (max-width: 1140px) { .dots { display: none; } }
+@media (max-width: 760px) { .band { padding: 32px 24px; } }
 </style>
