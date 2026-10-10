@@ -183,6 +183,7 @@ Proportion is about 70% surface and ink, 20% orange, 10% teal. Orange stands for
 The 11 services fall into two groups: **build** the product (6), then **grow** demand for it (5).
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'pie1': '#F26B1D', 'pie2': '#3FBFB5', 'pieSectionTextColor': '#16181D', 'pieStrokeColor': '#F4EFE6', 'pieOuterStrokeWidth': '0px'}}}%%
 pie showData
     title Services by group
     "Build: web, apps, systems, stores, UI/UX, branding" : 6
@@ -192,6 +193,7 @@ pie showData
 Starting prices in Jordanian dinars, shown on the site as "يبدأ من". Gulf clients get quotes in SAR or AED.
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'xyChart': {'plotColorPalette': '#F26B1D'}}}}%%
 xychart-beta
     title "One-time projects, starting price (JOD)"
     x-axis ["Landing page", "Company site", "Online store", "Custom app / system"]
@@ -200,6 +202,7 @@ xychart-beta
 ```
 
 ```mermaid
+%%{init: {'theme': 'base', 'themeVariables': {'xyChart': {'plotColorPalette': '#F26B1D'}}}}%%
 xychart-beta
     title "Monthly services, starting price (JOD / month)"
     x-axis ["Maintenance", "Social media", "Ads mgmt (min)", "SEO"]
