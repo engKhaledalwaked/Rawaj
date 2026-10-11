@@ -26,7 +26,7 @@ const year = new Date().getFullYear()
 </template>
 
 <style scoped>
-.site-footer { border-top: 1px solid var(--line); background: var(--surface-raised); padding-block: 56px 24px; margin-top: var(--space-24); }
+.site-footer { border-top: 1px solid var(--line); padding-block: 56px 24px; margin-top: var(--space-24); }
 .cols { display: grid; grid-template-columns: 2fr 1fr 1.5fr; gap: 40px; }
 .about { display: flex; flex-direction: column; gap: 16px; max-width: 360px; }
 nav { display: flex; flex-direction: column; gap: 6px; }

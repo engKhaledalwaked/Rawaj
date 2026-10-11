@@ -25,13 +25,12 @@ withDefaults(defineProps<{ title?: string; lead?: string }>(), {
   position: relative; overflow: hidden;
   display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
   padding: 48px; border-radius: var(--radius-lg);
-  background: var(--ink); color: var(--surface);
+  background: var(--brand-tint);
 }
-.band h2 { color: var(--surface); }
 .text { display: flex; flex-direction: column; gap: 8px; max-width: 560px; position: relative; }
-.text p { opacity: .85; }
-/* the logo's rising dots, as a quiet motif */
-.dots { position: absolute; inset-inline-end: 300px; top: 50%; transform: translateY(-50%); direction: ltr; display: flex; align-items: flex-end; gap: 10px; opacity: .9; }
+.text p { color: var(--ink-muted); }
+/* the logo's rising dots, as a quiet motif. Physical `left`: with direction ltr, inset-inline-end would mean right and land on the text */
+.dots { position: absolute; left: 300px; top: 50%; transform: translateY(-50%); direction: ltr; display: flex; align-items: flex-end; gap: 10px; opacity: .9; }
 .dots span { display: block; border-radius: 50%; background: var(--brand); }
 .dots span:nth-child(1) { width: 12px; height: 12px; }
 .dots span:nth-child(2) { width: 20px; height: 20px; margin-bottom: 14px; }
