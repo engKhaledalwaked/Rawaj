@@ -7,34 +7,48 @@ withDefaults(defineProps<{ title?: string; lead?: string }>(), {
 
 <template>
   <section class="container">
-    <div class="band">
-      <div class="dots" aria-hidden="true"><span /><span /><span /></div>
+    <div v-reveal class="band">
       <div class="text">
-        <h2 class="t-h2">{{ title }}</h2>
+        <h2 class="t-h1">{{ title }}</h2>
         <p>{{ lead }}</p>
       </div>
-      <NuxtLink to="/contact" class="btn btn-primary">
-        احجز مكالمة مجانية
-      </NuxtLink>
+      <!-- a slowly turning seal with the logo's rising dots at its centre -->
+      <div class="seal" aria-hidden="true">
+        <svg viewBox="0 0 160 160" class="ring">
+          <defs><path id="cta-ring" d="M80 80m-62 0a62 62 0 1 1 124 0a62 62 0 1 1-124 0" /></defs>
+          <text><textPath href="#cta-ring" textLength="388">نبني ثم نصنع الطلب • رواج • نبني ثم نصنع الطلب • رواج •</textPath></text>
+        </svg>
+        <span class="dots"><i /><i /><i /></span>
+      </div>
+      <NuxtLink to="/contact" class="btn btn-primary">احجز مكالمة مجانية</NuxtLink>
     </div>
   </section>
 </template>
 
 <style scoped>
 .band {
-  position: relative; overflow: hidden;
-  display: flex; align-items: center; justify-content: space-between; gap: 24px; flex-wrap: wrap;
-  padding: 48px; border-radius: var(--radius-lg);
+  display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 40px;
+  padding: 48px 56px; border-radius: var(--radius-lg);
   background: var(--brand-tint);
 }
-.text { display: flex; flex-direction: column; gap: 8px; max-width: 560px; position: relative; }
-.text p { color: var(--ink-muted); }
-/* the logo's rising dots, as a quiet motif. Physical `left`: with direction ltr, inset-inline-end would mean right and land on the text */
-.dots { position: absolute; left: 300px; top: 50%; transform: translateY(-50%); direction: ltr; display: flex; align-items: flex-end; gap: 10px; opacity: .9; }
-.dots span { display: block; border-radius: 50%; background: var(--brand); }
-.dots span:nth-child(1) { width: 12px; height: 12px; }
-.dots span:nth-child(2) { width: 20px; height: 20px; margin-bottom: 14px; }
-.dots span:nth-child(3) { width: 34px; height: 34px; margin-bottom: 34px; }
-@media (max-width: 1140px) { .dots { display: none; } }
-@media (max-width: 760px) { .band { padding: 32px 24px; } }
+.text { display: flex; flex-direction: column; gap: 10px; max-width: 560px; }
+.text p { color: var(--ink-muted); font-size: 17px; line-height: 30px; }
+
+.seal { position: relative; width: 150px; height: 150px; display: grid; place-items: center; }
+.ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: turn 22s linear infinite; }
+/* ltr base: in rtl, Chrome lays textPath text backwards from the path start, off the circle. The Arabic run still reads rtl. */
+.ring text { font: 600 13px var(--font-sans); fill: var(--ink); direction: ltr; }
+.dots { direction: ltr; display: flex; align-items: flex-end; gap: 6px; }
+.dots i { display: block; border-radius: 50%; background: var(--brand); }
+.dots i:nth-child(1) { width: 9px; height: 9px; }
+.dots i:nth-child(2) { width: 14px; height: 14px; margin-bottom: 9px; }
+.dots i:nth-child(3) { width: 24px; height: 24px; margin-bottom: 22px; }
+@keyframes turn { to { transform: rotate(360deg); } }
+
+@media (max-width: 960px) {
+  .band { grid-template-columns: 1fr; gap: 24px; padding: 36px 28px; }
+  .seal { display: none; }
+  .btn { justify-self: start; }
+}
+@media (prefers-reduced-motion: reduce) { .ring { animation: none; } }
 </style>

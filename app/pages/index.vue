@@ -1,55 +1,94 @@
 <script setup lang="ts">
-import { platforms, prices, services, steps } from '~/data/site'
+import { gsap } from 'gsap'
+import { facts, plans, platforms, services, steps } from '~/data/site'
 
 useHead({ title: 'رواج — برمجة وإعلانات تصنع الطلب' })
+const headline = 'نبني مشروعك الرقمي، ثم نصنع له الطلب.'.split(' ')
 const build = services.filter((s) => s.group === 'build')
 const grow = services.filter((s) => s.group === 'grow')
-const oneTime = prices.filter((p) => ['landing', 'web', 'store', 'system'].includes(p.id))
-const monthly = prices.filter((p) => p.unit)
+const oncePlans = plans.filter((p) => p.kind === 'once')
+
+// live local time, a small true fact (filled after mount to keep SSR and client identical)
+const time = ref('')
+let timer: ReturnType<typeof setInterval> | undefined
+const fmt = new Intl.DateTimeFormat('ar-JO-u-nu-latn', { timeZone: 'Asia/Amman', hour: 'numeric', minute: '2-digit' })
+
+const hero = ref<HTMLElement>()
+let ctx: gsap.Context | undefined
+onMounted(() => {
+  const tick = () => { time.value = fmt.format(new Date()) }
+  tick()
+  timer = setInterval(tick, 30_000)
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
+  ctx = gsap.context(() => {
+    gsap.timeline({ defaults: { ease: 'power3.out' } })
+      .to('.hw', { opacity: 1, y: 0, duration: 0.9, stagger: 0.07 })
+      .to('.hero-sub', { opacity: 1, y: 0, duration: 0.8, stagger: 0.1 }, '-=0.5')
+  }, hero.value)
+})
+onBeforeUnmount(() => { clearInterval(timer); ctx?.revert() })
 </script>
 
 <template>
   <div>
-    <!-- hero -->
-    <section class="hero container">
-      <div class="hero-text">
-        <h1 class="t-display">نبني مشروعك الرقمي، ثم نصنع له الطلب.</h1>
-        <p class="lead muted">مواقع وتطبيقات وإعلانات للشركات في الأردن والخليج. أسعار معلنة، ونتائج نقيسها بالأرقام.</p>
-        <div class="ctas">
-          <NuxtLink to="/contact" class="btn btn-primary">احجز مكالمة مجانية</NuxtLink>
-          <NuxtLink to="/pricing" class="btn btn-secondary">شاهد الأسعار</NuxtLink>
+    <!-- hero: the headline, and the 3D market rising to the logo's dots -->
+    <section ref="hero" class="hero">
+      <div class="container hero-grid">
+        <div class="hero-text">
+          <h1 class="hero-title">
+            <template v-for="(w, i) in headline" :key="i"><span class="hw">{{ w }}</span>{{ ' ' }}</template>
+          </h1>
+          <p class="lead muted hero-sub">مواقع وتطبيقات وإعلانات للشركات في الأردن والخليج. فريق واحد يبني ويسوّق ويقيس النتيجة.</p>
+          <div class="ctas hero-sub">
+            <NuxtLink to="/contact" class="btn btn-primary">احجز مكالمة مجانية</NuxtLink>
+            <NuxtLink to="/plans" class="btn btn-secondary">تصفّح الخطط</NuxtLink>
+          </div>
         </div>
+        <HeroMarket class="hero-3d" />
       </div>
-      <HeroScene />
     </section>
 
-    <!-- platforms we work on -->
-    <div class="platforms">
-      <div class="container plat-row">
-        <span class="muted t-small">نعمل على</span>
-        <ul>
-          <li v-for="p in platforms" :key="p" :dir="/[a-z]/i.test(p) ? 'ltr' : 'rtl'">{{ p }}</li>
+    <!-- facts: things that are true today -->
+    <div class="facts">
+      <div class="container facts-row">
+        <div class="fact">
+          <span class="muted t-small">الوقت الآن في الأردن</span>
+          <strong><i class="live" aria-hidden="true" />{{ time || '—' }}</strong>
+        </div>
+        <div v-for="f in facts" :key="f.label" class="fact">
+          <span class="muted t-small">{{ f.label }}</span>
+          <strong>{{ f.value }}</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- what we make, and where it runs -->
+    <div class="marquee" aria-label="خدماتنا والمنصات التي نعمل عليها">
+      <div class="track">
+        <ul v-for="n in 2" :key="n" :aria-hidden="n === 2">
+          <li v-for="s in services" :key="s.id"><RIcon :name="s.icon" :size="26" /> {{ s.title }}</li>
+        </ul>
+      </div>
+      <div class="track reverse">
+        <ul v-for="n in 2" :key="n" :aria-hidden="n === 2">
+          <li v-for="p in platforms" :key="p"><bdi>{{ p }}</bdi></li>
         </ul>
       </div>
     </div>
+
+    <!-- the problem, in one sentence that lights up as you read -->
+    <section class="section container">
+      <WordReveal text="أغلب الشركات تدفع لجهة تبني الموقع، ولجهة أخرى تجلب العملاء، ولا أحد يسأل: كم طلباً جاء؟ نحن نبني، ونسوّق، ونقيس، في فريق واحد." />
+    </section>
 
     <!-- build + grow -->
     <section class="section container">
       <SectionHead title="نصف عملنا بناء، ونصفه جلب العملاء" lead="فريق واحد يفهم الكود والإعلان معاً، فلا يضيع مشروعك بين شركتين." />
       <div class="halves">
-        <div class="half build">
-          <h3 class="half-title">نبني <span>الأساس الرقمي</span></h3>
-          <ul>
-            <li v-for="s in build" :key="s.id">
-              <RIcon :name="s.icon" :size="26" />
-              <div><strong>{{ s.title }}</strong><p class="muted">{{ s.summary }}</p></div>
-            </li>
-          </ul>
-        </div>
-        <div class="half grow">
-          <h3 class="half-title">ننمّي <span>العملاء والمبيعات</span></h3>
-          <ul>
-            <li v-for="s in grow" :key="s.id">
+        <div v-for="g in [{ id: 'build', t: 'نبني', s: 'الأساس الرقمي', items: build }, { id: 'grow', t: 'ننمّي', s: 'العملاء والمبيعات', items: grow }]" :key="g.id" class="half" :class="g.id">
+          <h3 class="half-title">{{ g.t }} <span>{{ g.s }}</span></h3>
+          <ul v-reveal="'stagger'">
+            <li v-for="s in g.items" :key="s.id">
               <RIcon :name="s.icon" :size="26" />
               <div><strong>{{ s.title }}</strong><p class="muted">{{ s.summary }}</p></div>
             </li>
@@ -59,16 +98,19 @@ const monthly = prices.filter((p) => p.unit)
       <NuxtLink to="/services" class="btn btn-link more">تفاصيل كل خدمة</NuxtLink>
     </section>
 
+    <!-- store → ad → order → growth, told on scroll -->
+    <StorySection />
+
     <!-- funnel -->
     <section class="section container">
-      <SectionHead title="من الإعلان إلى الطلب" lead="العميل يمر بأربع مراحل قبل أن يشتري، وفي كل مرحلة قد تخسره. هذه الخدمات التي تعمل في كل مرحلة." />
-      <DemandFunnel />
+      <SectionHead title="أين يضيع العميل، وكيف نمسكه" lead="العميل يمر بأربع مراحل قبل أن يشتري، وفي كل مرحلة قد تخسره. هذه الخدمات التي تعمل في كل مرحلة." />
+      <DemandFunnel v-reveal="'stagger'" />
     </section>
 
     <!-- process -->
     <section class="section container">
       <SectionHead title="ثلاث خطوات، وأرقام في كل خطوة" />
-      <ol class="timeline">
+      <ol v-reveal="'stagger'" class="timeline">
         <li v-for="(s, i) in steps" :key="s.title">
           <span class="node">{{ i + 1 }}</span>
           <h3 class="t-h3">{{ s.title }}</h3>
@@ -77,22 +119,14 @@ const monthly = prices.filter((p) => p.unit)
       </ol>
     </section>
 
-    <!-- prices -->
-    <section class="section container prices">
-      <div class="prices-text">
-        <SectionHead title="أسعار معلنة، بدون مفاجآت" lead="هذه أسعار البداية بالدينار الأردني. السعر النهائي تعرفه مكتوباً قبل أن نبدأ." />
-        <ul class="monthly">
-          <li v-for="p in monthly" :key="p.id">
-            <span>{{ p.name }}</span>
-            <span class="dots-fill" aria-hidden="true" />
-            <strong>{{ p.from }}<template v-if="!p.from.includes('%')"> د.أ</template></strong>
-            <span class="muted t-small">{{ p.unit }}</span>
-          </li>
-        </ul>
-        <NuxtLink to="/pricing" class="btn btn-link">قائمة الأسعار كاملة</NuxtLink>
+    <!-- plans, no prices -->
+    <section class="section container">
+      <div class="plans-head">
+        <SectionHead title="خطط واضحة، وعرض سعر مكتوب" lead="اختر الأقرب لمشروعك، ونرسل لك عرضاً خلال يوم عمل." />
+        <NuxtLink to="/plans" class="btn btn-link">كل الخطط، والخدمات الشهرية</NuxtLink>
       </div>
-      <div class="card chart-card">
-        <PriceChart :items="oneTime" caption="مشاريع لمرة واحدة، يبدأ من" />
+      <div v-reveal="'stagger'" class="plans">
+        <PlanCard v-for="p in oncePlans" :key="p.id" :plan="p" />
       </div>
     </section>
 
@@ -101,22 +135,45 @@ const monthly = prices.filter((p) => p.unit)
 </template>
 
 <style scoped>
-.hero { display: grid; grid-template-columns: 1fr 1.05fr; gap: 56px; align-items: center; padding-block: 64px 72px; }
-.hero-text { display: flex; flex-direction: column; gap: 24px; }
-.hero-text h1 { font-size: clamp(40px, 5.4vw, 64px); line-height: 1.18; letter-spacing: -.01em; }
-.lead { font-size: 18px; line-height: 32px; max-width: 520px; }
+/* hero */
+.hero { overflow: hidden; }
+.hero-grid { display: grid; grid-template-columns: 1fr 1.15fr; align-items: center; gap: 24px; min-height: calc(100vh - 72px); max-height: 860px; padding-block: 32px; }
+.hero-title { font: 700 clamp(42px, 5.6vw, 76px)/1.15 var(--font-display); letter-spacing: -.01em; }
+.hero-text { display: flex; flex-direction: column; gap: 26px; position: relative; z-index: 1; }
+.lead { font-size: 19px; line-height: 33px; max-width: 30em; }
 .ctas { display: flex; flex-wrap: wrap; gap: 12px; }
+/* the 3D canvas bleeds past the container edge for a wider stage */
+.hero-3d { height: min(72vh, 640px); margin-inline-end: -12vw; }
+.hw { display: inline-block; }
 
-.platforms { border-block: 1px solid var(--line); }
-.plat-row { display: flex; align-items: center; gap: 24px; padding-block: 18px; }
-.plat-row ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 28px; }
-.plat-row li { font: 600 17px/24px var(--font-display); color: var(--ink-muted); }
+/* facts */
+.facts { border-block: 1px solid var(--line); }
+.facts-row { display: grid; grid-template-columns: repeat(4, 1fr); }
+.fact { display: flex; flex-direction: column; gap: 4px; padding: 20px 0; padding-inline-end: 20px; }
+.fact + .fact { border-inline-start: 1px solid var(--line); padding-inline-start: 24px; }
+.fact strong { font: 600 18px/26px var(--font-display); display: inline-flex; align-items: center; gap: 8px; }
+.live { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2s ease-in-out infinite; }
+@keyframes pulse { 50% { opacity: .3; } }
 
+/* marquee: two rows moving in opposite directions, paused on hover */
+.marquee { padding-block: 40px; display: flex; flex-direction: column; gap: 14px; overflow: hidden; }
+.track { display: flex; width: max-content; animation: slide 48s linear infinite; }
+.track.reverse { animation-direction: reverse; animation-duration: 40s; }
+.marquee:hover .track { animation-play-state: paused; }
+.track ul { list-style: none; margin: 0; padding: 0; display: flex; }
+.track li { display: inline-flex; align-items: center; gap: 12px; white-space: nowrap; padding-inline: 28px; font: 700 clamp(24px, 3vw, 38px)/1.3 var(--font-display); }
+.track li::after { content: ''; width: 10px; height: 10px; border-radius: 50%; background: var(--brand); margin-inline-start: 44px; }
+.reverse li { font-weight: 600; color: var(--ink-muted); font-size: clamp(18px, 2vw, 24px); }
+.reverse li::after { background: var(--line); width: 7px; height: 7px; }
+/* RTL: the second copy sits to the left, so moving right by half loops seamlessly */
+@keyframes slide { to { transform: translateX(50%); } }
+
+/* build + grow */
 .halves { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 .half { border-radius: var(--radius-lg); padding: 32px; }
 .build { background: var(--accent-tint); }
 .grow { background: var(--brand-tint); }
-.half-title { font: 700 40px/1.1 var(--font-display); display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
+.half-title { font: 700 44px/1.1 var(--font-display); display: flex; align-items: baseline; gap: 12px; margin-bottom: 20px; }
 .half-title span { font: 600 15px/1 var(--font-sans); color: var(--ink-muted); }
 .build .half-title { color: var(--accent); }
 .grow .half-title { color: var(--brand-strong); }
@@ -126,33 +183,48 @@ const monthly = prices.filter((p) => p.unit)
 .half li p { font-size: 15px; line-height: 24px; }
 .more { margin-top: 16px; }
 
+/* process */
 .timeline { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; position: relative; }
-/* the line joining the three steps */
 .timeline::before { content: ''; position: absolute; top: 27px; inset-inline: 28px; height: 2px; background: var(--line); }
 .timeline li { position: relative; display: flex; flex-direction: column; gap: 10px; }
 .node { width: 56px; height: 56px; border-radius: 50%; display: grid; place-items: center; font: 700 22px/1 var(--font-display); background: var(--surface); border: 2px solid var(--ink); margin-bottom: 6px; }
 .timeline li:last-child .node { background: var(--brand); border-color: var(--brand); color: var(--ink-on-brand); }
 
-.prices { display: grid; grid-template-columns: .9fr 1.1fr; gap: 48px; align-items: center; }
-.prices-text :deep(.section-head) { margin-bottom: 24px; }
-.monthly { list-style: none; margin: 0 0 16px; padding: 0; display: flex; flex-direction: column; }
-.monthly li { display: flex; align-items: baseline; gap: 10px; padding-block: 10px; border-bottom: 1px solid var(--line); }
-.dots-fill { flex: 1; }
-.monthly strong { font-family: var(--font-display); font-size: 18px; }
-.chart-card { padding: 28px; }
+/* plans */
+.plans-head { display: flex; align-items: flex-end; justify-content: space-between; gap: 24px; flex-wrap: wrap; }
+.plans-head .btn-link { margin-bottom: var(--space-12); }
+.plans { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
 
+@media (max-width: 1100px) { .plans { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 960px) {
-  .hero, .prices { grid-template-columns: 1fr; gap: 40px; }
-  .hero { padding-block: 40px 56px; }
+  .hero-grid { grid-template-columns: 1fr; min-height: 0; max-height: none; padding-block: 40px 0; }
+  .hero-3d { height: 380px; margin-inline: -20px; }
+  .facts-row { grid-template-columns: repeat(2, 1fr); }
+  .fact:nth-child(3) { border-inline-start: 0; padding-inline-start: 0; }
+  .fact:nth-child(n + 3) { border-top: 1px solid var(--line); }
 }
 @media (max-width: 760px) {
-  .halves { grid-template-columns: 1fr; }
+  .halves, .plans { grid-template-columns: 1fr; }
   .half { padding: 24px 20px; }
-  .half-title { font-size: 32px; }
+  .half-title { font-size: 34px; }
   .timeline { grid-template-columns: 1fr; gap: 24px; }
   .timeline::before { top: 28px; bottom: 28px; inset-inline-start: 27px; inset-inline-end: auto; width: 2px; height: auto; }
   .timeline li { padding-inline-start: 76px; }
   .node { position: absolute; inset-inline-start: 0; top: 0; }
-  .plat-row { flex-direction: column; align-items: flex-start; gap: 8px; }
 }
+@media (prefers-reduced-motion: reduce) {
+  .track { animation: none; flex-wrap: wrap; width: auto; }
+  .track ul[aria-hidden="true"] { display: none; }
+  .track ul { flex-wrap: wrap; }
+  .live { animation: none; }
+}
+</style>
+
+<style>
+/* Unscoped on purpose: scoped `:global(html.js) .hw` compiles to plain `html.js` and hid the whole page.
+   The hero intro starts hidden only when JS can play it; the fallback animation shows it anyway after 2.5s. */
+@media (prefers-reduced-motion: no-preference) {
+  html.js .hero .hw, html.js .hero .hero-sub { opacity: 0; transform: translateY(24px); animation: hero-show 0s 2.5s forwards; }
+}
+@keyframes hero-show { to { opacity: 1; transform: none; } }
 </style>

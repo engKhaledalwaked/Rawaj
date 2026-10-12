@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
-const themeScript = `(function(){try{var s=localStorage.getItem('rawaj-theme');var d=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',d)}catch(e){document.documentElement.setAttribute('data-theme','light')}})()`
+// Also marks <html class="js"> so intro animations can start hidden without hiding content from no-JS visitors.
+const themeScript = `(function(){document.documentElement.classList.add('js');try{var s=localStorage.getItem('rawaj-theme');var d=s||(matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light');document.documentElement.setAttribute('data-theme',d)}catch(e){document.documentElement.setAttribute('data-theme','light')}})()`
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-07-15',

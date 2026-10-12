@@ -1,15 +1,23 @@
 <script setup lang="ts">
-import { contact, services } from '~/data/site'
+import { contact, plans, services } from '~/data/site'
 useHead({ title: 'تواصل معنا — رواج' })
 
 const form = reactive({ name: '', business: '', service: '', message: '' })
 const ready = computed(() => contact.whatsapp.length > 0)
 
+// "اطلب عرض سعر" on a plan links here with ?plan=<id>. Watched, not read once: on a prerendered page's first load
+// the route (and even location.search) is still the query-less prerender path at mount, and the query arrives after.
+const route = useRoute()
+onMounted(() => watch(() => route.query.plan, (id) => {
+  const plan = plans.find((p) => p.id === id)
+  if (plan) form.service = `خطة ${plan.name}`
+}, { immediate: true }))
+
 // The same text is previewed in the phone and sent to WhatsApp.
 const text = computed(() => [
   `مرحباً رواج، أنا ${form.name || '…'}`,
   form.business && `النشاط: ${form.business}`,
-  form.service && `الخدمة: ${form.service}`,
+  form.service && `المطلوب: ${form.service}`,
   form.message,
 ].filter(Boolean).join('\n'))
 
@@ -47,7 +55,12 @@ function send() {
         <label for="f-svc">ما الذي تحتاجه؟</label>
         <select id="f-svc" v-model="form.service">
           <option value="">لست متأكداً بعد</option>
-          <option v-for="s in services" :key="s.id" :value="s.title">{{ s.title }}</option>
+          <optgroup label="الخطط">
+            <option v-for="p in plans" :key="p.id" :value="`خطة ${p.name}`">{{ p.name }}</option>
+          </optgroup>
+          <optgroup label="الخدمات">
+            <option v-for="s in services" :key="s.id" :value="s.title">{{ s.title }}</option>
+          </optgroup>
         </select>
       </div>
       <div class="field">

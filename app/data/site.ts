@@ -13,7 +13,7 @@ export const nav = [
   { to: '/', label: 'الرئيسية' },
   { to: '/services', label: 'الخدمات' },
   { to: '/work', label: 'الأعمال' },
-  { to: '/pricing', label: 'الأسعار' },
+  { to: '/plans', label: 'الخطط' },
   { to: '/contact', label: 'تواصل معنا' },
 ]
 
@@ -41,6 +41,14 @@ export const funnel = [
   { stage: 'يشتري', what: 'دفع وحجز وتتبع لكل طلب', services: ['ecommerce', 'code', 'analytics'] },
 ]
 
+// The scroll story on the home page: one step per stage of OrderScene.
+export const story = [
+  { title: 'نبني المتجر', body: 'موقع أو متجر سريع وواضح، يعمل على الجوال قبل أي شيء.' },
+  { title: 'الإعلان يجلب الزائر', body: 'حملة على ميتا أو جوجل أو تيك توك، موجّهة لمن يشتري فعلاً.' },
+  { title: 'الطلب يصل على واتساب', body: 'زر واحد في المكان الصحيح، والطلب عندك مباشرة.' },
+  { title: 'نقيس ونحسّن', body: 'نعرف كم طلباً جاء من كل إعلان، ونزيد الميزانية على ما ينجح.' },
+]
+
 // Platforms named in the services above.
 export const platforms = ['Meta', 'Google', 'TikTok', 'Snapchat', 'سلة', 'زد', 'Shopify', 'App Store', 'Google Play']
 
@@ -50,18 +58,26 @@ export const steps = [
   { icon: 'growth', title: 'ننمّي', body: 'نقيس ونحسّن كل شهر: زيارات، طلبات، مبيعات.' },
 ]
 
-// Starting prices in Jordanian dinars. Gulf clients get quotes in SAR / AED.
-export type Price = { id: string; icon: string; name: string; from: string; unit?: string; note: string; featured?: boolean }
+// Plans shown on the site. No prices on the site by owner's decision: every plan ends in a quote request.
+// Internal starting prices are kept out of this file on purpose (it ships to the browser).
+export type Plan = { id: string; icon: string; name: string; kind: 'once' | 'monthly'; fit: string; note: string; includes: string[]; featured?: boolean }
 
-export const prices: Price[] = [
-  { id: 'landing', icon: 'web', name: 'صفحة هبوط', from: '250', note: 'صفحة واحدة لحملة أو منتج، مع نموذج طلب.' },
-  { id: 'web', icon: 'web', name: 'موقع شركة', from: '500', note: 'من 5 إلى 8 صفحات بالعربي والإنجليزي.', featured: true },
-  { id: 'store', icon: 'ecommerce', name: 'متجر إلكتروني', from: '1,200', note: 'يختلف حسب عدد المنتجات وطرق الدفع.' },
-  { id: 'system', icon: 'code', name: 'تطبيق أو نظام مخصص', from: '3,000', note: 'يحدد السعر بعد جلسة تحليل مجانية.' },
-  { id: 'social', icon: 'social-media', name: 'إدارة السوشيال ميديا', from: '150', unit: '/ شهر', note: 'حسب عدد المنصات والمنشورات.' },
-  { id: 'ads', icon: 'ads', name: 'إدارة الإعلانات', from: '15%', unit: 'من الميزانية', note: 'حد أدنى 150 د.أ شهرياً. ميزانية الإعلان منفصلة.' },
-  { id: 'seo', icon: 'seo', name: 'الظهور في جوجل', from: '250', unit: '/ شهر', note: 'النتائج تبدأ بالظهور بعد 3 إلى 6 أشهر.' },
-  { id: 'care', icon: 'maintenance', name: 'الصيانة والحماية', from: '30', unit: '/ شهر', note: 'تحديثات ونسخ احتياطي وتعديلات صغيرة.' },
+export const plans: Plan[] = [
+  { id: 'landing', icon: 'launch', kind: 'once', name: 'صفحة هبوط', fit: 'لحملة إعلانية أو منتج واحد', note: 'صفحة واحدة تقود الزائر إلى خطوة واحدة.', includes: ['تصميم مخصص للحملة', 'نموذج طلب أو زر واتساب', 'ربط بكسل الإعلانات'] },
+  { id: 'web', icon: 'web', kind: 'once', name: 'موقع شركة', fit: 'لشركة تريد حضوراً يثق به العميل', note: 'من 5 إلى 8 صفحات بالعربي والإنجليزي.', includes: ['تصميم مخصص لهويتك', 'لوحة تحكم لتعديل المحتوى', 'ربط بالواتساب وخرائط جوجل'], featured: true },
+  { id: 'store', icon: 'ecommerce', kind: 'once', name: 'متجر إلكتروني', fit: 'لمن يبيع منتجات ويريد الدفع أونلاين', note: 'مخصص، أو على سلة وزد وشوبيفاي.', includes: ['بوابات الدفع والشحن', 'رفع وتنظيم المنتجات', 'تتبع المبيعات من أول يوم'] },
+  { id: 'system', icon: 'code', kind: 'once', name: 'تطبيق أو نظام مخصص', fit: 'لعمل له طريقة خاصة لا تناسبها الحلول الجاهزة', note: 'يبدأ بجلسة تحليل مجانية.', includes: ['تحليل سير العمل قبل البرمجة', 'صلاحيات للموظفين', 'تقارير وتصدير بيانات'] },
+  { id: 'social', icon: 'social-media', kind: 'monthly', name: 'إدارة السوشيال ميديا', fit: 'حسب عدد المنصات والمنشورات', note: 'خطة محتوى وتصاميم ونشر وردود، كل شهر.', includes: ['خطة محتوى شهرية', 'تصاميم ومقاطع قصيرة', 'الرد على الرسائل والتعليقات'] },
+  { id: 'ads', icon: 'ads', kind: 'monthly', name: 'إدارة الإعلانات', fit: 'ميزانية الإعلان منفصلة وتدفعها للمنصة مباشرة', note: 'حملات تقاس بالطلبات لا بالإعجابات.', includes: ['إعداد التتبع والبكسل', 'تصاميم ونصوص الإعلانات', 'تقرير أسبوعي بالأرقام'] },
+  { id: 'seo', icon: 'seo', kind: 'monthly', name: 'الظهور في جوجل', fit: 'النتائج تبدأ بالظهور بعد 3 إلى 6 أشهر', note: 'لعملاء يبحثون عنك الآن.', includes: ['تحسين تقني للموقع', 'ملف النشاط على خرائط جوجل', 'محتوى يستهدف كلمات البحث'] },
+  { id: 'care', icon: 'maintenance', kind: 'monthly', name: 'الصيانة والحماية', fit: 'لكل موقع أو متجر بعد الإطلاق', note: 'حتى يبقى موقعك سريعاً وآمناً.', includes: ['تحديثات أمنية', 'نسخ احتياطي دوري', 'تعديلات صغيرة شهرية'] },
+]
+
+// True facts shown in the strip under the hero.
+export const facts = [
+  { label: 'نخدم', value: 'الأردن والخليج' },
+  { label: 'نرد', value: 'خلال يوم عمل' },
+  { label: 'نعمل', value: 'بالعربي والإنجليزي' },
 ]
 
 // Case studies: replace each [placeholder] with a real project before launch. Never publish invented results.

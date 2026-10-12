@@ -12,11 +12,14 @@
     "deploy": "nuxt generate && wrangler deploy"
   },
   "dependencies": {
+    "gsap": "^3.15.0",
     "nuxt": "4.5.2",
+    "three": "^0.186.1",
     "vue": "^3.5.0",
     "vue-router": "^4.5.0"
   },
   "devDependencies": {
+    "@types/three": "^0.186.0",
     "wrangler": "^4.149.0"
   }
 }

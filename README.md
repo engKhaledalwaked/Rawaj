@@ -32,11 +32,11 @@ Marketing site for Rawaj (رواج), a software and digital-advertising studio i
   </tr>
   <tr>
     <td><img src="docs/screenshots/services-light.png" alt="Services page: build and grow"></td>
-    <td><img src="docs/screenshots/pricing-dark.png" alt="Pricing page, dark theme"></td>
+    <td><img src="docs/screenshots/plans-dark.png" alt="Plans page, dark theme"></td>
   </tr>
   <tr>
     <td align="center"><sub>Services</sub></td>
-    <td align="center"><sub>Pricing, dark</sub></td>
+    <td align="center"><sub>Plans, dark</sub></td>
   </tr>
 </table>
 
@@ -55,7 +55,7 @@ Turn a visitor into a WhatsApp message or a booked call. Every page ends at the 
 flowchart LR
     V([Visitor]) --> H["/ Home"]
     H --> S["/services<br>11 services"]
-    H --> P["/pricing<br>8 starting prices"]
+    H --> P["/plans<br>8 plans, quote on request"]
     H --> W["/work<br>case studies"]
     S --> C["/contact"]
     P --> C
@@ -97,15 +97,15 @@ flowchart TB
     LG --> BR["app/assets/brand/<br>rawaj-logo.svg + rawaj-icons.json"]
     BR --> RL[RLogo] & RI[RIcon]
 
-    DATA["app/data/site.ts<br>contact · nav · services · steps · prices · work"] --> PG
+    DATA["app/data/site.ts<br>contact · nav · services · plans · story · funnel · work"] --> PG
 
     subgraph PG["app/pages/"]
         direction LR
-        index & services & pricing & work & contact
+        index & services & plans & work & contact
     end
 
     MC --> CMP
-    RL & RI --> CMP["components/<br>AppHeader · AppFooter · HeroScene · DemandFunnel<br>PriceChart · ChatPreview · SectionHead · CtaBand · ThemeToggle"]
+    RL & RI --> CMP["components/<br>HeroMarket (three.js) · StorySection · OrderScene · WordReveal<br>DemandFunnel · PlanCard · ChatPreview · CtaBand · SectionHead · AppHeader · AppFooter"]
     CMP --> PG
     PG -- "nuxt generate" --> OUT[(".output/public<br>12 prerendered routes")]
 ```
@@ -178,7 +178,7 @@ Proportion is about 70% surface and ink, 20% orange, 10% teal. Orange stands for
 | Radius | 8 inputs · 14 cards and buttons · 28 hero panels |
 | Icons | 25 custom, 24px grid, 2px round stroke, one orange "Rawaj dot" each |
 
-## Services and prices
+## Services and plans
 
 The 11 services fall into two groups: **build** the product (6), then **grow** demand for it (5).
 
@@ -190,28 +190,16 @@ pie showData
     "Grow: ads, social, SEO, analytics, maintenance" : 5
 ```
 
-Starting prices in Jordanian dinars, shown on the site as "يبدأ من". Gulf clients get quotes in SAR or AED.
+### Plans
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'xyChart': {'plotColorPalette': '#F26B1D'}}}}%%
-xychart-beta
-    title "One-time projects, starting price (JOD)"
-    x-axis ["Landing page", "Company site", "Online store", "Custom app / system"]
-    y-axis "JOD" 0 --> 3200
-    bar [250, 500, 1200, 3000]
-```
+The site shows **plans without prices**: what each one is for and what it includes, ending in a quote request. The visitor picks a plan, lands on `/contact?plan=<id>` with that plan pre-selected, and the WhatsApp message is written for them. Quotes come back in writing within a working day (JOD in Jordan, SAR or AED in the Gulf).
 
-```mermaid
-%%{init: {'theme': 'base', 'themeVariables': {'xyChart': {'plotColorPalette': '#F26B1D'}}}}%%
-xychart-beta
-    title "Monthly services, starting price (JOD / month)"
-    x-axis ["Maintenance", "Social media", "Ads mgmt (min)", "SEO"]
-    y-axis "JOD / month" 0 --> 300
-    bar [30, 150, 150, 250]
-```
-
-Ads management is 15% of ad spend with a 150 JOD monthly minimum; the ad budget itself is separate. These prices come from market research (about 60% confidence) and will be checked with real clients.
-
+| One-time projects | Monthly services |
+|---|---|
+| Landing page | Social media management |
+| Company website (most requested) | Ads management |
+| Online store | Google visibility (SEO) |
+| Custom app or system | Maintenance and protection |
 ## Rules the code follows
 
 1. **Tokens only.** Colours, spacing, radii and fonts come from `var(--…)`. Components contain no raw hex values.
@@ -231,9 +219,11 @@ rawaj-web/
 │   │   ├── brand/          rawaj-logo.svg, rawaj-icons.json (inlined, theme-aware)
 │   │   └── css/            tokens.css (generated) + main.css
 │   ├── components/         AppHeader, AppFooter, RLogo, RIcon, ThemeToggle, SectionHead, CtaBand,
-│   │                       HeroScene, DemandFunnel, PriceChart, ChatPreview
+│   │                       HeroMarket, StorySection, OrderScene, WordReveal, DemandFunnel, PlanCard, ChatPreview
 │   ├── data/site.ts        all copy and data
-│   ├── pages/              index, services, pricing, work, contact
+│   ├── lib/market-scene.ts the hero's three.js scene (lazy-loaded)
+│   ├── plugins/motion.ts   GSAP + ScrollTrigger, v-reveal directive
+│   ├── pages/              index, services, plans, work, contact
 │   └── app.vue
 ├── design-system/          brand guide, tokens.json, logos, icons, component previews
 ├── docs/                   README screenshots and palette
@@ -250,7 +240,7 @@ Most placeholders live in `app/data/site.ts`.
 - [ ] `contact.whatsapp` (format `9627XXXXXXXX`). The contact form stays disabled until it is set.
 - [ ] `contact.phone`, `contact.email`, `contact.location`
 - [ ] `work`: replace the 3 placeholder case studies with real projects and measured results
-- [ ] Validate prices with the first real clients
+- [ ] Validate internal prices with the first real clients (they are not shown on the site)
 - [ ] Domain and hosting (any static host serving `.output/public`)
 
 ## Roadmap
