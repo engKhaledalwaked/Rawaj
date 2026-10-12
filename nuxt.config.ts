@@ -4,6 +4,8 @@ const themeScript = `(function(){try{var s=localStorage.getItem('rawaj-theme');v
 export default defineNuxtConfig({
   compatibilityDate: '2026-07-15',
   devtools: { enabled: false },
+  // Always plain static output, even when Nitro detects Cloudflare CI.
+  nitro: { preset: 'static' },
   css: ['~/assets/css/tokens.css', '~/assets/css/main.css'],
   app: {
     head: {

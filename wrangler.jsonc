@@ -1,0 +1,10 @@
+// Static-assets-only Worker: serves the output of `npm run generate`, no server code.
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "rawaj-web",
+  "compatibility_date": "2026-10-06",
+  "assets": {
+    "directory": ".output/public",
+    "not_found_handling": "404-page"
+  }
+}
