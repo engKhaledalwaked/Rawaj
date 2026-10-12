@@ -50,5 +50,4 @@ withDefaults(defineProps<{ title?: string; lead?: string }>(), {
   .seal { display: none; }
   .btn { justify-self: start; }
 }
-@media (prefers-reduced-motion: reduce) { .ring { animation: none; } }
 </style>

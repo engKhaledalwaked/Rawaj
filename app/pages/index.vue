@@ -19,7 +19,6 @@ onMounted(() => {
   const tick = () => { time.value = fmt.format(new Date()) }
   tick()
   timer = setInterval(tick, 30_000)
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
   ctx = gsap.context(() => {
     gsap.timeline({ defaults: { ease: 'power3.out' } })
       .to('.hw', { opacity: 1, y: 0, duration: 0.9, stagger: 0.07 })
@@ -212,19 +211,11 @@ onBeforeUnmount(() => { clearInterval(timer); ctx?.revert() })
   .timeline li { padding-inline-start: 76px; }
   .node { position: absolute; inset-inline-start: 0; top: 0; }
 }
-@media (prefers-reduced-motion: reduce) {
-  .track { animation: none; flex-wrap: wrap; width: auto; }
-  .track ul[aria-hidden="true"] { display: none; }
-  .track ul { flex-wrap: wrap; }
-  .live { animation: none; }
-}
 </style>
 
 <style>
 /* Unscoped on purpose: scoped `:global(html.js) .hw` compiles to plain `html.js` and hid the whole page.
    The hero intro starts hidden only when JS can play it; the fallback animation shows it anyway after 2.5s. */
-@media (prefers-reduced-motion: no-preference) {
-  html.js .hero .hw, html.js .hero .hero-sub { opacity: 0; transform: translateY(24px); animation: hero-show 0s 2.5s forwards; }
-}
+html.js .hero .hw, html.js .hero .hero-sub { opacity: 0; transform: translateY(24px); animation: hero-show 0s 2.5s forwards; }
 @keyframes hero-show { to { opacity: 1; transform: none; } }
 </style>

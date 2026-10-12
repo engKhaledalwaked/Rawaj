@@ -4,7 +4,7 @@
 import * as THREE from 'three'
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js'
 
-type Opts = { reduced: boolean; compact: boolean }
+type Opts = { compact: boolean }
 
 const css = (name: string) => getComputedStyle(document.documentElement).getPropertyValue(name).trim()
 const smooth = (a: number, b: number, x: number) => { const t = Math.min(1, Math.max(0, (x - a) / (b - a))); return t * t * (3 - 2 * t) }
@@ -68,7 +68,7 @@ export function createMarket(canvas: HTMLCanvasElement, host: HTMLElement, opts:
   const scl = new THREE.Vector3()
   const quat = new THREE.Quaternion()
   const pointer = { x: 0, y: 0, tx: 0, ty: 0 }
-  let intro = opts.reduced ? 1 : 0
+  let intro = 0
   let scroll = 0
 
   function layout(t: number) {
@@ -78,7 +78,7 @@ export function createMarket(canvas: HTMLCanvasElement, host: HTMLElement, opts:
     for (let x = 0; x < NX; x++) {
       for (let z = 0; z < NZ; z++) {
         const onPath = z === PATH_Z
-        const wave = opts.reduced ? 0 : 0.16 * Math.sin(t * 1.1 + x * 0.55 + z * 0.8)
+        const wave = 0.16 * Math.sin(t * 1.1 + x * 0.55 + z * 0.8)
         const depth = 1 - Math.abs(z - PATH_Z) / NZ * 0.6
         let h = (0.25 + trend(x) * (3.6 + scroll * 1.8) * depth + wave) * (onPath ? 1.12 : 1)
         // staggered intro: columns rise left to right
@@ -95,7 +95,7 @@ export function createMarket(canvas: HTMLCanvasElement, host: HTMLElement, opts:
     // dots rise up and to the right of the tallest column, like the logo
     const top = tallest + 0.6
     const lx = cx(NX - 1)
-    const bob = opts.reduced ? 0 : Math.sin(t * 1.6) * 0.08
+    const bob = Math.sin(t * 1.6) * 0.08
     const spots: [number, number][] = [[-1.5, 0], [-0.75, 0.75], [0.25, 1.7]]
     dots.forEach((d, j) => {
       const [dx, dy] = spots[j]!
@@ -132,7 +132,7 @@ export function createMarket(canvas: HTMLCanvasElement, host: HTMLElement, opts:
     scroll = Math.min(1, Math.max(0, -rect.top / Math.max(1, rect.height)))
     layout((now - start) / 1000)
     renderer.render(scene, camera)
-    if (!opts.reduced && visible && !document.hidden) raf = requestAnimationFrame(frame)
+    if (visible && !document.hidden) raf = requestAnimationFrame(frame)
   }
   const kick = () => { if (!raf) raf = requestAnimationFrame(frame) }
 
@@ -147,7 +147,7 @@ export function createMarket(canvas: HTMLCanvasElement, host: HTMLElement, opts:
     pointer.ty = (e.clientY / window.innerHeight - 0.5) * 2
   }
   const onVis = () => kick()
-  if (!opts.reduced) window.addEventListener('pointermove', onMove, { passive: true })
+  window.addEventListener('pointermove', onMove, { passive: true })
   document.addEventListener('visibilitychange', onVis)
 
   paint()

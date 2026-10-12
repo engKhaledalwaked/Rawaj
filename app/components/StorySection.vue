@@ -1,6 +1,6 @@
 <script setup lang="ts">
 // "From store to order" told on scroll: the section pins on desktop and OrderScene advances one stage per step.
-// Phones, tablets and reduced motion get the whole scene at once and a plain list.
+// Phones and tablets get the whole scene at once and a plain list.
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { story } from '~/data/site'
@@ -12,7 +12,7 @@ let mm: gsap.MatchMedia | undefined
 
 onMounted(() => {
   mm = gsap.matchMedia()
-  mm.add('(min-width: 961px) and (prefers-reduced-motion: no-preference)', () => {
+  mm.add('(min-width: 961px)', () => {
     stage.value = 1
     ScrollTrigger.create({
       trigger: root.value, pin: panel.value, start: 'top 72px', end: `+=${story.length * 60}%`,
@@ -58,5 +58,4 @@ li p { font-size: 15px; line-height: 24px; }
   .panel { grid-template-columns: 1fr; min-height: 0; gap: 32px; padding-block: 64px; }
   li { opacity: 1; }
 }
-@media (prefers-reduced-motion: reduce) { li { opacity: 1; transition: none; } }
 </style>

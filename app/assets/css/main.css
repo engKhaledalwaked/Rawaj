@@ -81,7 +81,3 @@ p { margin: 0; }
   .section { padding-block: 64px; }
   .card { padding: var(--space-4); }
 }
-@media (prefers-reduced-motion: reduce) {
-  html { scroll-behavior: auto; }
-  .btn { transition: none; }
-}

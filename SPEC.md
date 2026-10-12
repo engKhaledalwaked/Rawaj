@@ -31,7 +31,7 @@ Light (default) and dark, from the tokens. Follows the visitor's system setting 
 
 ## Motion
 - One memorable moment per page at most; the home page's are the 3D hero and the pinned story.
-- Everything respects `prefers-reduced-motion` (3D shows a still frame, no pins, no reveals, strips stop).
+- Animation runs for everyone; `prefers-reduced-motion` is deliberately ignored (owner's decision, 2026-10-12).
 - 3D never blocks first paint; without WebGL the hero still works.
 
 ## Components
@@ -39,6 +39,6 @@ Light (default) and dark, from the tokens. Follows the visitor's system setting 
 
 ## Done when
 - `npm run generate` succeeds with no warnings that matter.
-- Every page renders correctly in light and dark, at 1280px and 390px, with and without reduced motion.
+- Every page renders correctly in light and dark, at 1280px and 390px.
 - Text contrast follows the tokens (all ≥ 4.5:1).
 - No price appears in any page or JS file.

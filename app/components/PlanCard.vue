@@ -41,5 +41,4 @@ defineProps<{ plan: Plan }>()
 ul { list-style: none; margin: 8px 0 20px; padding: 14px 0 0; border-top: 1px solid var(--line); display: flex; flex-direction: column; gap: 8px; font-size: 15px; }
 li { display: flex; align-items: center; gap: 8px; }
 .btn { margin-top: auto; }
-@media (prefers-reduced-motion: reduce) { .plan { transition: none; } .plan:hover { transform: none; } }
 </style>

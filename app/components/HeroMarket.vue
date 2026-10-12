@@ -10,7 +10,6 @@ onMounted(async () => {
     const { createMarket } = await import('~/lib/market-scene')
     if (!host.value || !canvas.value) return
     destroy = createMarket(canvas.value, host.value, {
-      reduced: matchMedia('(prefers-reduced-motion: reduce)').matches,
       compact: matchMedia('(max-width: 760px)').matches,
     })
     ready.value = true
@@ -31,5 +30,4 @@ onBeforeUnmount(() => destroy?.())
 .market { position: relative; width: 100%; height: 100%; min-height: 360px; }
 canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; opacity: 0; transition: opacity .6s ease; }
 .ready canvas { opacity: 1; }
-@media (prefers-reduced-motion: reduce) { canvas { transition: none; } }
 </style>

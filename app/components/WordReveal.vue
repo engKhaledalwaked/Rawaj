@@ -9,7 +9,6 @@ const root = ref<HTMLElement>()
 let ctx: gsap.Context | undefined
 
 onMounted(() => {
-  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return
   ctx = gsap.context(() => {
     gsap.fromTo(root.value!.querySelectorAll('.w'), { opacity: 0.16 }, {
       opacity: 1, ease: 'none', stagger: 0.1,

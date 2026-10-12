@@ -149,7 +149,4 @@ const bars = [26, 38, 33, 52, 64, 86]
 .bubble.out { transition-delay: .25s; }
 .order { transition-delay: .5s; }
 .rise { transition-delay: .5s; }
-@media (prefers-reduced-motion: reduce) {
-  .ad, .phone, .chart, .bubble, .order, .rise, .bar { transition: none; }
-}
 </style>
