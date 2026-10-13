@@ -36,8 +36,8 @@ const factors = [
         </ul>
       </div>
       <div v-reveal class="card gulf">
-        <h2 class="t-h3">عملاء الخليج</h2>
-        <p class="muted">نعمل مع شركات في السعودية والإمارات وباقي الخليج عن بُعد، ونسعّر بالريال أو الدرهم. اطلب عرضاً وسيصلك خلال يوم عمل.</p>
+        <h2 class="t-h3">عملاء من خارج الأردن</h2>
+        <p class="muted">نعمل عن بُعد مع شركات في أي دولة، ونسعّر بعملتك. اطلب عرضاً وسيصلك خلال يوم عمل.</p>
         <NuxtLink to="/contact" class="btn btn-tech">اطلب عرض سعر</NuxtLink>
       </div>
     </section>

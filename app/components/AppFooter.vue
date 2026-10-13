@@ -8,7 +8,7 @@ const year = new Date().getFullYear()
     <div class="container cols">
       <div class="about">
         <RLogo :height="36" />
-        <p class="muted">برمجة وإعلانات تصنع الطلب. نخدم الشركات في الأردن والخليج.</p>
+        <p class="muted">برمجة وإعلانات تصنع الطلب. نخدم الشركات حول العالم، من الأردن.</p>
       </div>
       <nav aria-label="روابط الموقع">
         <h2 class="t-label">الموقع</h2>

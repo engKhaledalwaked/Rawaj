@@ -8,7 +8,7 @@
 ### نبني مشروعك الرقمي، ثم نصنع له الطلب
 
 **We build the product, then we create demand for it.**<br>
-Marketing site for Rawaj (رواج), a software and digital-advertising studio in Jordan serving Jordan and the Gulf.
+Marketing site for Rawaj (رواج), a software and digital-advertising studio based in Jordan, serving clients worldwide.
 
 ![Nuxt](https://img.shields.io/badge/Nuxt-4.5.2-00DC82?logo=nuxt&logoColor=white)
 ![Vue](https://img.shields.io/badge/Vue-3-4FC08D?logo=vuedotjs&logoColor=white)
@@ -192,7 +192,7 @@ pie showData
 
 ### Plans
 
-The site shows **plans without prices**: what each one is for and what it includes, ending in a quote request. The visitor picks a plan, lands on `/contact?plan=<id>` with that plan pre-selected, and the WhatsApp message is written for them. Quotes come back in writing within a working day (JOD in Jordan, SAR or AED in the Gulf).
+The site shows **plans without prices**: what each one is for and what it includes, ending in a quote request. The visitor picks a plan, lands on `/contact?plan=<id>` with that plan pre-selected, and the WhatsApp message is written for them. Quotes come back in writing within a working day (in the client's currency).
 
 | One-time projects | Monthly services |
 |---|---|

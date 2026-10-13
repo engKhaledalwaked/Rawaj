@@ -1,7 +1,7 @@
 # Rawaj website — spec (v2)
 
 ## Goal
-Marketing site for **Rawaj (رواج)**, a software + digital-advertising studio from Jordan serving Jordan and the Gulf. One job: turn a visitor into a booked call or a WhatsApp message.
+Marketing site for **Rawaj (رواج)**, a software + digital-advertising studio based in Jordan, serving clients worldwide. One job: turn a visitor into a booked call or a WhatsApp message.
 
 ## Stack
 - Nuxt 4.5.2 + Vue 3, static output (`nuxt generate`), no backend. Deployed as a Cloudflare static-assets Worker.
@@ -20,7 +20,7 @@ Light (default) and dark, from the tokens. Follows the visitor's system setting 
 |---|---|
 | `/` | 3D hero (columns rising to the logo's dots), true facts strip with live Jordan time, moving services/platforms strips, word-by-word statement, build + grow (all 11 services), pinned scroll story (store → ad → WhatsApp order → growth), ad-to-order funnel, 3 steps, one-time plans, final CTA |
 | `/services` | All 11 services in build / grow panels with what is included, funnel |
-| `/plans` | All 8 plans (4 one-time, 4 monthly) with what each includes, **no prices**; each links to `/contact?plan=<id>`. What changes a quote, Gulf quotes. `/pricing` redirects here |
+| `/plans` | All 8 plans (4 one-time, 4 monthly) with what each includes, **no prices**; each links to `/contact?plan=<id>`. What changes a quote, clients outside Jordan. `/pricing` redirects here |
 | `/work` | Case-study slots (placeholders until real projects are added) |
 | `/contact` | WhatsApp, phone, email, location, hours; a form that opens WhatsApp with the message filled in, a live phone preview of that message, plan pre-selected from `?plan=` |
 

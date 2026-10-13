@@ -14,7 +14,7 @@ export default defineNuxtConfig({
       title: 'رواج — برمجة وإعلانات تصنع الطلب',
       meta: [
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: 'رواج: مواقع وتطبيقات وإعلانات رقمية للشركات في الأردن والخليج. أسعار معلنة ونتائج تقاس.' },
+        { name: 'description', content: 'رواج: مواقع وتطبيقات وإعلانات رقمية لشركات حول العالم، من الأردن. نتائج تقاس بالأرقام.' },
         { name: 'theme-color', content: '#F4EFE6', media: '(prefers-color-scheme: light)' },
         { name: 'theme-color', content: '#121316', media: '(prefers-color-scheme: dark)' },
       ],

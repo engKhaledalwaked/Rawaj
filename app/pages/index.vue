@@ -37,7 +37,7 @@ onBeforeUnmount(() => { clearInterval(timer); ctx?.revert() })
           <h1 class="hero-title">
             <template v-for="(w, i) in headline" :key="i"><span class="hw">{{ w }}</span>{{ ' ' }}</template>
           </h1>
-          <p class="lead muted hero-sub">مواقع وتطبيقات وإعلانات للشركات في الأردن والخليج. فريق واحد يبني ويسوّق ويقيس النتيجة.</p>
+          <p class="lead muted hero-sub">مواقع وتطبيقات وإعلانات لشركات حول العالم. فريق واحد يبني ويسوّق ويقيس النتيجة.</p>
           <div class="ctas hero-sub">
             <NuxtLink to="/contact" class="btn btn-primary">احجز مكالمة مجانية</NuxtLink>
             <NuxtLink to="/plans" class="btn btn-secondary">تصفّح الخطط</NuxtLink>

@@ -75,7 +75,7 @@ export const plans: Plan[] = [
 
 // True facts shown in the strip under the hero.
 export const facts = [
-  { label: 'نخدم', value: 'الأردن والخليج' },
+  { label: 'نخدم', value: 'شركات حول العالم' },
   { label: 'نرد', value: 'خلال يوم عمل' },
   { label: 'نعمل', value: 'بالعربي والإنجليزي' },
 ]
