@@ -21,7 +21,7 @@ Light (default) and dark, from the tokens. Follows the visitor's system setting 
 | `/` | 3D hero (columns rising to the logo's dots), true facts strip with live Jordan time, moving services/platforms strips, word-by-word statement, build + grow (all 11 services), pinned scroll story (store → ad → WhatsApp order → growth), ad-to-order funnel, 3 steps, one-time plans, final CTA |
 | `/services` | All 11 services in build / grow panels with what is included, funnel |
 | `/plans` | All 8 plans (4 one-time, 4 monthly) with what each includes, **no prices**; each links to `/contact?plan=<id>`. What changes a quote, clients outside Jordan. `/pricing` redirects here |
-| `/work` | Case-study slots (placeholders until real projects are added) |
+| `/work` | Maskan (real: screenshot, what was built, live link) + case-study slots still awaiting real projects |
 | `/contact` | WhatsApp, phone, email, location, hours; a form that opens WhatsApp with the message filled in, a live phone preview of that message, plan pre-selected from `?plan=` |
 
 ## Content rules

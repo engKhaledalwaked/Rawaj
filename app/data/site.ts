@@ -81,7 +81,15 @@ export const facts = [
 ]
 
 // Case studies: replace each [placeholder] with a real project before launch. Never publish invented results.
-export const work = [
+// `built` lists only what the live project shows; add `result` only with measured numbers.
+export type Work = { tag: string; title: string; client: string; result?: string; built?: string[]; url?: string; image?: string }
+
+export const work: Work[] = [
+  {
+    tag: 'منصة ويب', title: 'مسكن', client: 'منصة تجمع الشقق والعقارات المتاحة للإيجار في الأردن، من تطويرنا بالكامل.',
+    url: 'https://maskan-web-ruddy.vercel.app/', image: '/work/maskan.jpg',
+    built: ['بحث في الشقق السكنية والسياحية وسكن الطلاب', 'حسابات وتسجيل لأصحاب العقارات', 'عربي وإنجليزي، ووضع فاتح وداكن'],
+  },
   { tag: 'موقع', title: '[اسم المشروع]', client: '[اسم العميل والمجال]', result: '[النتيجة بالأرقام، مثلاً: الطلبات من الموقع خلال 60 يوماً]' },
   { tag: 'تطبيق', title: '[اسم المشروع]', client: '[اسم العميل والمجال]', result: '[النتيجة بالأرقام]' },
   { tag: 'إعلانات', title: '[اسم الحملة]', client: '[اسم العميل والمجال]', result: '[تكلفة الطلب قبل وبعد]' },
