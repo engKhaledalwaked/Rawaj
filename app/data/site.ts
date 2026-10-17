@@ -82,7 +82,28 @@ export const facts = [
 
 // Case studies: replace each [placeholder] with a real project before launch. Never publish invented results.
 // `built` lists only what the live project shows; add `result` only with measured numbers.
-export type Work = { tag: string; title: string; client: string; result?: string; built?: string[]; url?: string; image?: string }
+export type Work = { tag: string; title: string; client: string; result?: string; built?: string[]; url?: string; image?: string; to?: string; cta?: string }
+
+// Website demos from the owner's portfolio (/work/sites). Each is a demo prepared for a real business, not a paid
+// client, and is labelled as such on the site. Ordered strongest first (design, completeness, ease of contact).
+export const demoSites = [
+  { id: 'arab-dental', name: 'المركز العربي لطب الأسنان', sector: 'عيادة أسنان', city: 'عمّان', url: 'https://arab-dental.vercel.app/' },
+  { id: 'lucca', name: 'لوكا ستيك هاوس', sector: 'مطعم ستيك', city: 'عمّان', url: 'https://lucca-steakhouse.vercel.app/' },
+  { id: 'sicilia', name: 'صقلية', sector: 'مطعم إيطالي', city: 'إربد', url: 'https://sicilia-livid.vercel.app/' },
+  { id: 'smilelife', name: 'عيادة بسمة الحياة البيطرية', sector: 'عيادة بيطرية', city: 'الرياض', url: 'https://smilelife-demo.vercel.app/' },
+  { id: 'threestar', name: 'استوديو تري ستار', sector: 'استوديو تصوير', city: 'الرياض', url: 'https://threestar-demo.vercel.app/' },
+  { id: 'durar', name: 'درر الوطنية لتأجير السيارات', sector: 'تأجير سيارات', city: 'الرياض', url: 'https://durar-demo.vercel.app/' },
+  { id: 'madar', name: 'مدار النجوم للاستقدام', sector: 'مكتب استقدام', city: 'الرياض', url: 'https://madar-demo-psi.vercel.app/' },
+  { id: 'dptc', name: 'مركز الضباب للعلاج الطبيعي', sector: 'علاج طبيعي', city: 'الرياض', url: 'https://dptc-demo.vercel.app/' },
+  { id: 'maz', name: 'معهد ماز العالي للتدريب', sector: 'معهد تدريب', city: 'الرياض', url: 'https://maz-demo.vercel.app/' },
+  { id: 'raha', name: 'ورشة الرحى', sector: 'صيانة أجهزة منزلية', city: 'الرياض', url: 'https://raha-demo.vercel.app/' },
+  { id: 'lady', name: 'ستوديو ليدي', sector: 'تصوير نسائي', city: 'الرياض', url: 'https://lady-demo.vercel.app/' },
+  { id: 'yamama', name: 'ركن اليمامة', sector: 'صيانة سيارات', city: 'الرياض', url: 'https://yamama-demo.vercel.app/' },
+  { id: 'steel', name: 'ستيل', sector: 'مطعم وكافيه', city: 'إربد', url: 'https://steel-cafe.vercel.app/' },
+  { id: 'badaea', name: 'بدائع لبنان للديكور', sector: 'ديكور وتجهيز محلات', city: 'الرياض', url: 'https://badaea-demo.vercel.app/' },
+  { id: 'rodna', name: 'أكاديمية ردنا', sector: 'تدريب نسائي', city: 'الرياض', url: 'https://rodna-demo.vercel.app/' },
+  { id: 'yahya', name: 'بن يحيى للعقارات', sector: 'مكتب عقارات', city: 'الرياض', url: 'https://yahya-demo.vercel.app/' },
+]
 
 export const work: Work[] = [
   {
@@ -95,6 +116,10 @@ export const work: Work[] = [
     image: '/work/chaty.png',
     built: ['محادثات فورية فردية وجماعية', 'مكالمات صوت وفيديو', 'صور وفيديو وملفات ورسائل صوتية', 'يعمل دون إنترنت، ويرسل الرسائل عند عودة الاتصال'],
   },
-  { tag: 'موقع', title: '[اسم المشروع]', client: '[اسم العميل والمجال]', result: '[النتيجة بالأرقام، مثلاً: الطلبات من الموقع خلال 60 يوماً]' },
+  {
+    tag: 'مواقع شركات', title: 'نماذج مواقع لـ16 نشاطاً', client: 'نسخ عرض تجريبية أعددناها لأنشطة قائمة في الأردن والسعودية: عيادات ومطاعم ومعاهد وورش واستوديوهات.',
+    image: '/work/sites/arab-dental.jpg', to: '/work/sites', cta: 'تصفّح المواقع الـ16',
+    built: ['عربي وإنجليزي في كل موقع', 'زر اتصال وخريطة الوصول في كل موقع', 'حجز أو طلب عبر واتساب في أغلبها'],
+  },
   { tag: 'إعلانات', title: '[اسم الحملة]', client: '[اسم العميل والمجال]', result: '[تكلفة الطلب قبل وبعد]' },
 ]

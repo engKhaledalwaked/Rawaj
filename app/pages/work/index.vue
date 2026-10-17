@@ -22,6 +22,7 @@ useHead({ title: 'الأعمال — رواج' })
             <li v-for="b in w.built" :key="b"><RIcon name="check" :size="18" /> {{ b }}</li>
           </ul>
           <a v-if="w.url" :href="w.url" target="_blank" rel="noopener" class="btn btn-secondary visit">زر الموقع</a>
+          <NuxtLink v-if="w.to" :to="w.to" class="btn btn-primary visit">{{ w.cta }}</NuxtLink>
           <!-- before / after: bars stay outlined until real numbers are added -->
           <div v-if="w.result" class="result">
             <div class="ba" aria-hidden="true">
