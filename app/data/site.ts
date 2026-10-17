@@ -121,5 +121,6 @@ export const work: Work[] = [
     image: '/work/sites/arab-dental.jpg', to: '/work/sites', cta: 'تصفّح المواقع الـ16',
     built: ['عربي وإنجليزي في كل موقع', 'زر اتصال وخريطة الوصول في كل موقع', 'حجز أو طلب عبر واتساب في أغلبها'],
   },
-  { tag: 'إعلانات', title: '[اسم الحملة]', client: '[اسم العميل والمجال]', result: '[تكلفة الطلب قبل وبعد]' },
+  // Ads case study hidden until there is a real campaign with measured results (owner, 2026-10-17). Shape:
+  // { tag: 'إعلانات', title: '…', client: '…', result: 'تكلفة الطلب قبل وبعد' },
 ]
