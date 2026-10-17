@@ -11,7 +11,7 @@ useHead({ title: 'الأعمال — رواج' })
       <article v-for="(w, i) in work" :key="i" class="case" :class="{ flip: i % 2 }">
         <div class="frame">
           <div class="chrome" aria-hidden="true"><span /><span /><span /><em v-if="w.url" dir="ltr">{{ w.url.replace(/^https?:\/\/|\/$/g, '') }}</em></div>
-          <img v-if="w.image" :src="w.image" :alt="`الصفحة الرئيسية لـ ${w.title}`" class="shot" width="1280" height="800" loading="lazy">
+          <img v-if="w.image" :src="w.image" :alt="`لقطة شاشة من ${w.title}`" class="shot" width="1280" height="800" loading="lazy">
           <div v-else class="shot stripes" aria-hidden="true"><span class="placeholder">[صورة المشروع]</span></div>
         </div>
         <div class="info">
