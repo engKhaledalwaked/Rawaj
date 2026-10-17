@@ -39,11 +39,10 @@ h2 { color: var(--ink-muted); margin-bottom: 8px; }
   .site-footer { padding-block: 40px 20px; }
   .cols { grid-template-columns: 1fr; gap: 32px; }
   .about { max-width: none; gap: 12px; }
-  /* links wrap as pill buttons instead of one long list; each is a 44px tap target */
-  nav { flex-direction: row; flex-wrap: wrap; gap: 8px; }
+  /* plain links in one wrapping row instead of a long list; still 44px tall to tap */
+  nav { flex-direction: row; flex-wrap: wrap; gap: 0 24px; }
   nav h2 { flex-basis: 100%; }
-  nav a { min-height: 44px; display: inline-flex; align-items: center; padding: 0 16px; border: 1px solid var(--line); border-radius: 99px; background: var(--surface-raised); }
-  .contact .line { min-height: 44px; margin: 0; gap: 10px; border-bottom: 1px solid var(--line); }
+  nav a { min-height: 44px; display: inline-flex; align-items: center; }
   .legal { margin-top: 28px; text-align: center; }
 }
 </style>
