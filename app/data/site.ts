@@ -82,7 +82,9 @@ export const facts = [
 
 // Case studies: replace each [placeholder] with a real project before launch. Never publish invented results.
 // `built` lists only what the live project shows; add `result` only with measured numbers.
-export type Work = { tag: string; title: string; client: string; result?: string; built?: string[]; url?: string; image?: string; to?: string; cta?: string }
+// `demo`: public showcase logins. Only add accounts the project itself makes read-only (Maskan's are).
+export type DemoLogin = { role: string; who: string; path: string; email: string; password: string }
+export type Work = { tag: string; title: string; client: string; result?: string; built?: string[]; url?: string; image?: string; to?: string; cta?: string; demo?: DemoLogin[] }
 
 // Website demos from the owner's portfolio (/work/sites). Each is a demo prepared for a real business, not a paid
 // client, and is labelled as such on the site. Ordered strongest first (design, completeness, ease of contact).
@@ -110,6 +112,10 @@ export const work: Work[] = [
     tag: 'منصة ويب', title: 'مسكن', client: 'منصة تجمع الشقق والعقارات المتاحة للإيجار في الأردن، من تطويرنا بالكامل.',
     url: 'https://maskan-web-ruddy.vercel.app/', image: '/work/maskan.jpg',
     built: ['بحث في الشقق السكنية والسياحية وسكن الطلاب', 'حسابات وتسجيل لأصحاب العقارات', 'عربي وإنجليزي، ووضع فاتح وداكن'],
+    demo: [
+      { role: 'حساب المالك', who: 'سامر الخطيب، خطة النخبة العقارية', path: '/auth/host-login', email: 'showcase.host@maskan.app', password: 'Maskan@Show2026' },
+      { role: 'حساب المستأجر', who: 'ليان العمري', path: '/auth/login', email: 'showcase.tenant@maskan.app', password: 'Maskan@Show2026' },
+    ],
   },
   {
     tag: 'تطبيق جوال', title: 'Chaty', client: 'تطبيق رسائل فوري بأسلوب تيليجرام، من تطويرنا بالكامل.',
